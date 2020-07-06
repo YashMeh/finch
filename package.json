@@ -1,0 +1,23 @@
+{
+  "name": "finch",
+  "version": "1.0.0",
+  "description": "A minimalistic CRM tool for social-media engagement",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "aws",
+    "twitter",
+    "crm",
+    "comprehend",
+    "nats"
+  ],
+  "author": "YashMeh",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.709.0",
+    "nats": "^1.4.9",
+    "twit": "^2.2.11"
+  }
+}
