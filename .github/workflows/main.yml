@@ -25,11 +25,8 @@ jobs:
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
           mongodb-replica-set: finch
-        
         - run: cd ./comprehend-service  
-
         - run: npm install
-
         - run: npm test
           env:
             dbURI: mongodb://localhost:27017/finch  
