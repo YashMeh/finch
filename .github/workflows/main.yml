@@ -1,0 +1,52 @@
+name: Finch CI/CD
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    container:
+      image: node
+    strategy:
+      matrix:
+        mongodb-version: [4.0, 4.2]
+
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.3.0
+        with:
+          mongodb-version: ${{ matrix.mongodb-version }}
+          mongodb-replica-set: finch
+
+      - name: Install Dependencies
+        working-directory: ./comprehend-service
+        run: npm install
+
+      - name: Running Tests
+        working-directory: ./comprehend-service
+        run: npm test
+  cd:
+    runs-on: ubuntu-latest
+    needs: ci
+
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+
+      - name: Docker Login
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and tag comprehend worker
+        working-directory: ./comprehend-service
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/comprehend:0.0.2 .
+
+      - name: Push the image to docker hub
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/comprehend:0.0.2

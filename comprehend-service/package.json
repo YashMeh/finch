@@ -1,15 +1,19 @@
 {
   "name": "comprehend-service",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.2",
+  "description": "tweet parsing worker",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon worker.js",
-    "start": "node worker.js"
+    "start": "node worker.js",
+    "test": "export NODE_ENV=test && mocha  --exit --timeout 30000"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "aws",
+    "comprehend"
+  ],
+  "author": "YashMeh",
+  "license": "MIT",
   "dependencies": {
     "aws-sdk": "^2.715.0",
     "body-parser": "^1.19.0",
@@ -21,5 +25,11 @@
     "mongoose": "^5.9.25",
     "morgan": "^1.10.0",
     "nats": "^1.4.9"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^7.2.0",
+    "nodemon": "^2.0.4"
   }
 }
