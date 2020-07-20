@@ -25,7 +25,9 @@ jobs:
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
           mongodb-replica-set: finch
-        working-directory: ./comprehend-service
+        
+        - run: cd ./comprehend-service  
+
         - run: npm install
 
         - run: npm test
