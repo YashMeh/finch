@@ -12,23 +12,22 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: node:8.7.0-alpine
-    strategy:
-      matrix:
-        mongodb-version: [4.0, 4.2]
-
+    services:
+      mongofinch:
+        image: mongo
+        ports:
+          - 27017:27017
     steps:
       - name: Git checkout
         uses: actions/checkout@v2
 
-      - name: Start MongoDB
+      - name: Install dependencies and run tests
+        working-directory: ./comprehend-service
         run: |
-          apt install -y mongodb
-          service mongodb start 
-          cd ./comprehend-service  
           npm install
           npm test
         env:
-          dbURI: mongodb://localhost:27017/finch
+          dbURI: mongodb://mongofinch:27017/finch
 
   cd:
     runs-on: ubuntu-latest
