@@ -1,4 +1,4 @@
-name: Finch CI/CD
+name: Finch
 
 on:
   push:
@@ -48,5 +48,8 @@ jobs:
         working-directory: ./twitter-service
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/twitter:0.0.2 .
 
-      - name: Push the image to docker hub
+      - name: Push the twitter image to docker hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/twitter:0.0.2
+
+      - name: Push the comprehend image to docker hub
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/comprehend:0.0.2
