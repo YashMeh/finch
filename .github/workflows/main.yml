@@ -28,8 +28,8 @@ jobs:
         run: cd ./comprehend-service  
         run: npm install
         run: npm test
-          env:
-            dbURI: mongodb://localhost:27017/finch  
+        env:
+          dbURI: mongodb://localhost:27017/finch  
 
      
   cd:
