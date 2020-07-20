@@ -3,6 +3,9 @@
 Finch is a multi-lingual tweet parsing tool which gives the entities involved in the tweet and the sentiment of the tweet,in addition to all the information provided by the Twitter-API. <br> <br>
 ![T Image Size](https://img.shields.io/badge/twitter%20image%20size-91.5%20MB-blue) ![C Image Size](https://img.shields.io/badge/comprehend%20image%20size-195%20MB-blue) ![GitHub](https://img.shields.io/github/license/YashMeh/finch) ![Build](https://github.com/YashMeh/finch/workflows/Build/badge.svg)
 
+### Languages Supported
+Hindi, English, Korean, Chinese, German, Italian, French, Arabic
+
 ### Architecture :building_construction:
 
 <p align="center"><img src="./assets/arch-finch.jpg" alt="Finch Arch" height="350" width="500" /></p>
