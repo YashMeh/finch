@@ -1,0 +1,20 @@
+{
+  "name": "comprehend-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon worker.js",
+    "start": "node worker.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.715.0",
+    "chalk": "^4.1.0",
+    "dotenv": "^8.2.0",
+    "mongoose": "^5.9.25",
+    "nats": "^1.4.9"
+  }
+}

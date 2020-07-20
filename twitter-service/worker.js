@@ -20,7 +20,9 @@ nc.on("error", (err) => {
 });
 
 nc.on("connect", () => {
-  console.log(chalk.green(`Connected to queue at ${process.env.NATS_URL}`));
+  console.log(
+    chalk.green(`Twitter Service Connected to queue at ${process.env.NATS_URL}`)
+  );
 });
 
 //Initial date
@@ -37,15 +39,16 @@ var job = new CronJob(
     T.get(
       "search/tweets",
       {
-        q: `${process.env.TAG} since:${DATE_NOW}`,
+        q: `${process.env.TAG}`,
         count: 100,
         tweet_mode: "extended",
       },
       (err, data, response) => {
         if (err) console.log(chalk.red(`Unable to fetch tweets ${err}`));
-
+        //console.log(data);
         //publish all the tweets to the queue
         data.statuses.forEach((status, index) => {
+          console.log(status);
           nc.publish("tweet", status);
         });
       }
