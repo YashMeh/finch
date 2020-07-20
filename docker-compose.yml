@@ -1,0 +1,54 @@
+version: "3"
+services:
+  twitter:
+    image: yashmeh/twitter:0.0.2
+    environment:
+      - NATS_URL=nats://nats-alpine:4222
+      - CONSUMER_KEY=<your-twitter-consumer-key>
+      - CONSUMER_SECRET=<your-twitter-consumer-secret>
+      - ACCESS_TOKEN=<your-twitter-access-token>
+      - ACCESS_TOKEN_SECRET=<your-twitter-access-secret>
+      - TAG=<single-tag-which-you-want-to-follow>
+    networks:
+      - backend
+    links:
+      - mongo
+      - nats
+    command: npm run start
+  comprehend:
+    image: yashmeh/comprehend:0.0.2
+    expose:
+      - "5000"
+    ports:
+      - "5000:5000"
+    environment:
+      - NATS_URL=nats://nats-alpine:4222
+      - ACCESS_KEY=<your-aws-access-key>
+      - SECRET_ACCESS=<your-aws-secret-key>
+      - dbURI=mongodb://mongofinch:27017/finch
+    networks:
+      - backend
+    links:
+      - mongo
+      - nats
+    command: npm run start
+  mongo:
+    container_name: mongofinch
+    image: mongo
+    networks:
+      - backend
+    volumes:
+      - db-data:/data/db
+    ports:
+      - "27017:27017"
+  nats:
+    container_name: nats-alpine
+    image: nats:2.1.7-alpine3.11
+    networks:
+      - backend
+    ports:
+      - "4222:4222"
+networks:
+  backend:
+volumes:
+  db-data:

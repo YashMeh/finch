@@ -3,14 +3,31 @@ const NATS = require("nats");
 const chalk = require("chalk");
 const AWS = require("aws-sdk");
 const mongoose = require("mongoose");
+const express = require("express");
+const morgan = require("morgan");
+const helmet = require("helmet");
+const cors = require("cors");
+
 const Tweet = require("./models/TweetMeta");
+const app = express();
+
+/**
+ * Using
+ * morgan as logger(logging only during dev)
+ * helmet for security
+ * cors for allowing cross-region requests
+ */
+if (process.env.NODE_ENV !== "test") app.use(morgan("dev"));
+app.use(helmet());
+app.use(cors());
+app.use(express.json());
+
 //configuring the AWS environment
 AWS.config.update({
   accessKeyId: process.env.ACCESS_KEY,
   secretAccessKey: process.env.SECRET_ACCESS,
   region: "us-east-1",
 });
-//docker uri- "mongodb://mongo:27017/finch";
 //configuring the mongoose instance
 mongoose
   .connect(process.env.dbURI, {
@@ -40,7 +57,21 @@ nc.on("connect", () => {
     )
   );
 });
-
+//Languages supported by aws comprehend
+const langComprehend = [
+  "de",
+  "en",
+  "es",
+  "it",
+  "pt",
+  "fr",
+  "ja",
+  "ko",
+  "hi",
+  "ar",
+  "zh",
+  "zh-TW",
+];
 //subscribing on twitter endpoint
 nc.subscribe("tweet", function (msg) {
   var { created_at, id_str, user, lang, retweet_count } = msg;
@@ -68,15 +99,20 @@ nc.subscribe("tweet", function (msg) {
     console.log("Received an original tweet");
     //console.log(msg.full_text);
     var params = {
-      LanguageCode: "en" /* required - other option is es */,
+      LanguageCode:
+        TweetObj.lang in langComprehend
+          ? TweetObj.lang
+          : "en" /* required - other option is es if not supported run for english*/,
       Text: msg.full_text,
     };
     TweetObj.text = msg.full_text;
   }
+  //Detect entities present in the tweet
   comprehend.detectEntities(params, (err, processedData) => {
     if (err) console.log(err, err.stack);
     //console.log(processedData);
     TweetObj.entities = processedData.Entities;
+    //Detect sentiment of the tweet
     comprehend.detectSentiment(params, (err, processedData2) => {
       if (err) console.log(err, err.stack);
       TweetObj.sentiment = processedData2;
@@ -90,4 +126,15 @@ nc.subscribe("tweet", function (msg) {
         });
     });
   });
+});
+//setting the endpoint
+app.get("/api/v1", (req, res) => {
+  Tweet.find({}).then((response) => {
+    res.json({ data: response, status: 200 });
+  });
+});
+const PORT = process.env.port || 5000;
+app.listen(PORT, (err) => {
+  if (err) throw err;
+  console.log(chalk.greenBright(`server running at port ${PORT}`));
 });

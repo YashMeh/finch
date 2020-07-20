@@ -40,7 +40,7 @@ var job = new CronJob(
       "search/tweets",
       {
         q: `${process.env.TAG}`,
-        count: 100,
+        count: 20,
         tweet_mode: "extended",
       },
       (err, data, response) => {
@@ -48,7 +48,7 @@ var job = new CronJob(
         //console.log(data);
         //publish all the tweets to the queue
         data.statuses.forEach((status, index) => {
-          console.log(status);
+          //console.log(status);
           nc.publish("tweet", status);
         });
       }
