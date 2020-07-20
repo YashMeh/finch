@@ -11,7 +11,7 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     container:
-      image: node
+      image: node:8.7.0-alpine
     strategy:
       matrix:
         mongodb-version: [4.0, 4.2]
@@ -25,17 +25,14 @@ jobs:
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
           mongodb-replica-set: finch
-
-      - name: Install Dependencies
         working-directory: ./comprehend-service
-        run: npm install
+        - run: npm install
 
-      - name: Running Tests
-        working-directory: ./comprehend-service
-        run: npm test
-        env:
-          dbURI: mongodb://localhost:27017/finch
+        - run: npm test
+          env:
+            dbURI: mongodb://localhost:27017/finch  
 
+     
   cd:
     runs-on: ubuntu-latest
     needs: ci
