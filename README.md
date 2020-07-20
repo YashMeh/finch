@@ -73,3 +73,15 @@ SECRET_ACCESS=
 ### Stargrazers over time :star:
 
 [![Stargazers over time](https://starchart.cc/YashMeh/finch.svg)](https://starchart.cc/YashMeh/finch)
+
+### Yash Mehrotra
+
+![GitHub followers](https://img.shields.io/github/followers/YashMeh?label=Follow&style=social) ![Twitter URL](https://img.shields.io/twitter/follow/YashMeh29715504?label=Follow&style=social)
+
+---
+
+```C++
+if(repo.isAwesome || repo.isHelpful){
+    StarRepo();
+}
+```
