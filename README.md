@@ -1,9 +1,7 @@
 ## Finch
 
 Finch is a multi-lingual tweet parsing tool which gives the entities involved in the tweet and the sentiment of the tweet,in addition to all the information provided by the Twitter-API. <br> <br>
-![T Image Size](https://img.shields.io/badge/twitter%20image%20size-91.5%20MB-blue) ![C Image Size](https://img.shields.io/badge/comprehend%20image%20size-195%20MB-blue) ![GitHub](https://img.shields.io/github/license/YashMeh/finch) ![Build](https://github.com/YashMeh/finch/workflows/Finch/badge.svg)
-
-
+![T Image Size](https://img.shields.io/badge/twitter%20image%20size-91.5%20MB-blue) ![C Image Size](https://img.shields.io/badge/comprehend%20image%20size-195%20MB-blue) ![GitHub](https://img.shields.io/github/license/YashMeh/finch) ![Build](https://github.com/YashMeh/finch/workflows/Build/badge.svg)
 
 ### Architecture :building_construction:
 
@@ -24,13 +22,13 @@ Finch is a multi-lingual tweet parsing tool which gives the entities involved in
 
 There are 2 methods to run the project
 
-1. Using Docker (Easiest)  :whale:
+1. Using Docker (Easiest) :whale:
 
 - Just edit the `docker-compose.yml` file and add the required keys.
 
 - The images are auto-built and can be found at [Docker Hub](https://hub.docker.com/u/yashmeh)
 
-2. Individual Setup  :bearded_person:
+2. Individual Setup :bearded_person:
 
 - Download and install the NATS server, mongoDB and nodeJS (v>=8.x).
 

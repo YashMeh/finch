@@ -1,4 +1,4 @@
-name: Finch
+name: Build
 
 on:
   push:
