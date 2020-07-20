@@ -44,5 +44,9 @@ jobs:
         working-directory: ./comprehend-service
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/comprehend:0.0.2 .
 
+      - name: Build and tag twitter worker
+        working-directory: ./twitter-service
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/twitter:0.0.2 .
+
       - name: Push the image to docker hub
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/comprehend:0.0.2
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/twitter:0.0.2
