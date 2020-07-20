@@ -22,8 +22,8 @@ jobs:
 
       - name: Start MongoDB
         run: |
-          sudo apt install -y mongodb
-          sudo service mongodb start 
+          apt install -y mongodb
+          service mongodb start 
           cd ./comprehend-service  
           npm install
           npm test
