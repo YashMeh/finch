@@ -33,6 +33,9 @@ jobs:
       - name: Running Tests
         working-directory: ./comprehend-service
         run: npm test
+        env:
+          dbURI: mongodb://localhost:27017/finch
+
   cd:
     runs-on: ubuntu-latest
     needs: ci
