@@ -1,0 +1,29 @@
+{
+  "com_entities": [
+    {
+      "Score": 0.9999052286148071,
+      "Type": "PERSON",
+      "Text": "Macri",
+      "BeginOffset": 16,
+      "EndOffset": 21
+    },
+    {
+      "Score": 0.7282480597496033,
+      "Type": "DATE",
+      "Text": "ahora",
+      "BeginOffset": 132,
+      "EndOffset": 137
+    }
+  ],
+  "lang": "es",
+  "text": "Que es actitud? Macri renunció a su jubilación de privilegio, la q te jedi, jubilación por ex presidenta, jubilación de su marido y ahora la de privilegio y yo soy de derecha q no tengo un mango inescrupulosos mentirosos y corruptos",
+  "com_sentiment": {
+    "Sentiment": "NEGATIVE",
+    "SentimentScore": {
+      "Positive": 0.0010790955275297165,
+      "Negative": 0.9176512360572815,
+      "Neutral": 0.08124984055757523,
+      "Mixed": 0.000019870425603585318
+    }
+  }
+}

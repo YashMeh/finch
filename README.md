@@ -60,6 +60,18 @@ SECRET_ACCESS=
 
 - Checkout the database at `http://localhost:5000/api/v1`
 
+- By default,all your previous tag data is saved in a DB volume named finch_data-db. Thus, in case you want to start from a fresh DB
+
+- Delete the volume using
+
+```
+docker volume rm finch_data-db -f
+```
+
+### Output
+
+<p align="center"><img src="./assets/sample-output.png" alt="Finch Arch" height="350" width="500" /></p>
+
 ### Work Left :man_factory_worker:
 
 - [ ] Add exhaustive tests

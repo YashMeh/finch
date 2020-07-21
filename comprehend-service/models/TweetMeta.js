@@ -26,10 +26,10 @@ const tweetSchema = new mongoose.Schema({
   retweet_count: {
     type: Number,
   },
-  entities: {
+  com_entities: {
     type: Array,
   },
-  sentiment: {
+  com_sentiment: {
     type: Object,
   },
 });

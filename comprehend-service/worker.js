@@ -91,7 +91,10 @@ if (process.env.NODE_ENV !== "test") {
       console.log("Received a retweet");
       //console.log(msg.retweeted_status.full_text);
       var params = {
-        LanguageCode: "en" /* required - other option is es */,
+        LanguageCode:
+          TweetObj.lang in langComprehend
+            ? TweetObj.lang
+            : "en" /* required - other option is es */,
         Text: msg.retweeted_status.full_text,
       };
       TweetObj.text = msg.retweeted_status.full_text;
@@ -111,11 +114,11 @@ if (process.env.NODE_ENV !== "test") {
     comprehend.detectEntities(params, (err, processedData) => {
       if (err) console.log(err, err.stack);
       //console.log(processedData);
-      TweetObj.entities = processedData.Entities;
+      TweetObj.com_entities = processedData.Entities;
       //Detect sentiment of the tweet
       comprehend.detectSentiment(params, (err, processedData2) => {
         if (err) console.log(err, err.stack);
-        TweetObj.sentiment = processedData2;
+        TweetObj.com_sentiment = processedData2;
         //console.log(TweetObj);
         Tweet.create(TweetObj)
           .then((response) => {
