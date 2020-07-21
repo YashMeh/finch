@@ -71,7 +71,7 @@ SECRET_ACCESS=
 
 > Finch fetches the tag given in the .env file every 5 minutes and updates the database
 
-### Stargrazers over time :star:
+## Stargazers over time
 
 [![Stargazers over time](https://starchart.cc/YashMeh/finch.svg)](https://starchart.cc/YashMeh/finch)
 
