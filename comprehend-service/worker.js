@@ -87,29 +87,24 @@ if (process.env.NODE_ENV !== "test") {
     };
 
     //console.log(msg);
+
+    var params = {
+      LanguageCode:
+        TweetObj.lang in langComprehend
+          ? TweetObj.lang
+          : "en" /* required - other option is es */,
+    };
+
     if (msg.hasOwnProperty("retweeted_status")) {
       console.log("Received a retweet");
-      //console.log(msg.retweeted_status.full_text);
-      var params = {
-        LanguageCode:
-          TweetObj.lang in langComprehend
-            ? TweetObj.lang
-            : "en" /* required - other option is es */,
-        Text: msg.retweeted_status.full_text,
-      };
-      TweetObj.text = msg.retweeted_status.full_text;
+      params.Text = msg.retweeted_status.full_text;
     } else {
       console.log("Received an original tweet");
-      //console.log(msg.full_text);
-      var params = {
-        LanguageCode:
-          TweetObj.lang in langComprehend
-            ? TweetObj.lang
-            : "en" /* required - other option is es if not supported run for english*/,
-        Text: msg.full_text,
-      };
-      TweetObj.text = msg.full_text;
+      params.Text = msg.full_text;
     }
+
+    TweetObj.text = params.Text;
+
     //Detect entities present in the tweet
     comprehend.detectEntities(params, (err, processedData) => {
       if (err) console.log(err, err.stack);
