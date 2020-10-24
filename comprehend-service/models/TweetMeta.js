@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 
+/**
+ * This is the schema of the tweet message
+ */
 const tweetSchema = new mongoose.Schema({
   created_at: {
     type: String,
